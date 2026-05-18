@@ -17,7 +17,7 @@ const statusSeverity = {
 
 const submitForm = useForm({});
 function submitPermohonan() {
-    submitForm.post(`/permohonan/${props.permohonan.id}/submit`);
+    submitForm.post(`/jarsiplus/permohonan/${props.permohonan.id}/submit`);
 }
 
 const fileInput = ref(null);
@@ -27,7 +27,7 @@ function onFileChange(e) {
 }
 function uploadFile() {
     if (!uploadForm.file) return;
-    uploadForm.post(`/permohonan/${props.permohonan.id}/upload`, {
+    uploadForm.post(`/jarsiplus/permohonan/${props.permohonan.id}/upload`, {
         onSuccess: () => {
             uploadForm.reset();
             if (fileInput.value) fileInput.value.value = '';
@@ -45,7 +45,7 @@ function formatDate(d) {
 <template>
     <AdminLayout>
         <div class="mb-4 flex items-center justify-between">
-            <Link href="/permohonan" class="text-xs text-zinc-600 hover:text-zinc-900 inline-flex items-center gap-1">
+            <Link href="/jarsiplus/permohonan" class="text-xs text-zinc-600 hover:text-zinc-900 inline-flex items-center gap-1">
                 <i class="pi pi-arrow-left text-[10px]"></i>
                 Kembali ke daftar
             </Link>
@@ -81,7 +81,7 @@ function formatDate(d) {
                 <div class="flex items-center gap-2">
                     <Link
                         v-if="permohonan.status === 'draft'"
-                        :href="`/permohonan/${permohonan.id}/edit`"
+                        :href="`/jarsiplus/permohonan/${permohonan.id}/edit`"
                         class="text-xs font-medium text-zinc-700 bg-white border border-zinc-300 hover:bg-zinc-50 px-3 py-1.5 rounded inline-flex items-center gap-1.5"
                     >
                         <i class="pi pi-pencil text-[10px]"></i>

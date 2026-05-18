@@ -86,7 +86,7 @@ class PermohonanController extends Controller
         ]);
 
         return redirect()
-            ->route('permohonan.show', $permohonan)
+            ->route('jarsiplus.permohonan.show', $permohonan)
             ->with('success', 'Permohonan berhasil dibuat');
     }
 
@@ -112,7 +112,7 @@ class PermohonanController extends Controller
 
         if ($permohonan->status !== 'draft' && ! $this->isAdmin($request->user())) {
             return redirect()
-                ->route('permohonan.show', $permohonan)
+                ->route('jarsiplus.permohonan.show', $permohonan)
                 ->with('error', 'Hanya permohonan draft yang dapat diedit');
         }
 
@@ -138,7 +138,7 @@ class PermohonanController extends Controller
         $permohonan->update($validated);
 
         return redirect()
-            ->route('permohonan.show', $permohonan)
+            ->route('jarsiplus.permohonan.show', $permohonan)
             ->with('success', 'Permohonan berhasil diperbarui');
     }
 
@@ -166,7 +166,7 @@ class PermohonanController extends Controller
         $permohonan->delete();
 
         return redirect()
-            ->route('permohonan.index')
+            ->route('jarsiplus.permohonan.index')
             ->with('success', 'Permohonan berhasil dihapus');
     }
 

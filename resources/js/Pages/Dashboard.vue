@@ -34,7 +34,7 @@ const stats = [
         <SectionCard title="Permohonan Terbaru">
             <template #header-actions>
                 <Link
-                    href="/permohonan/create"
+                    href="/jarsiplus/permohonan/create"
                     class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-900 bg-zinc-100 hover:bg-zinc-200 px-2.5 py-1.5 rounded"
                 >
                     <i class="pi pi-plus text-[10px]"></i>
@@ -48,7 +48,7 @@ const stats = [
             >
                 <template #action>
                     <Link
-                        href="/permohonan/create"
+                        href="/jarsiplus/permohonan/create"
                         class="inline-flex items-center gap-1.5 text-xs font-medium text-white bg-zinc-900 hover:bg-zinc-800 px-3 py-1.5 rounded"
                     >
                         <i class="pi pi-plus text-[10px]"></i>

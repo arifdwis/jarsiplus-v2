@@ -29,7 +29,7 @@ function submit() {
                 <p class="text-xs text-zinc-500 mt-0.5">Isi data inovasi daerah</p>
             </div>
             <Link
-                href="/permohonan"
+                href="/jarsiplus/permohonan"
                 class="text-xs text-zinc-600 hover:text-zinc-900 inline-flex items-center gap-1"
             >
                 <i class="pi pi-arrow-left text-[10px]"></i>
@@ -101,7 +101,7 @@ function submit() {
                     {{ form.processing ? 'Menyimpan...' : 'Simpan Permohonan' }}
                 </button>
                 <Link
-                    href="/permohonan"
+                    href="/jarsiplus/permohonan"
                     class="text-xs font-medium text-zinc-700 bg-white border border-zinc-300 hover:bg-zinc-50 px-4 py-1.5 rounded"
                 >
                     Batal
