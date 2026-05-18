@@ -137,29 +137,34 @@ function clearRecent() {
         :showHeader="false"
         :draggable="false"
         :dismissable-mask="true"
-        class="!w-full !max-w-xl"
-        :pt="{ root: { class: '!shadow-2xl' }, content: { class: '!p-0 !rounded-lg !overflow-hidden' } }"
+        position="top"
+        class="!w-full !max-w-2xl !mt-20"
+        :pt="{
+            mask: { class: '!bg-zinc-900/50 dark:!bg-black/70 backdrop-blur-sm' },
+            root: { class: '!shadow-xl !border !border-zinc-200 dark:!border-zinc-700' },
+            content: { class: '!p-0 !rounded-md !overflow-hidden !bg-white dark:!bg-zinc-900' },
+        }"
     >
         <!-- Search input -->
-        <div class="flex items-center px-4 border-b border-zinc-100 dark:border-zinc-800">
-            <i class="pi pi-search text-zinc-400 text-base"></i>
+        <div class="flex items-center px-4 py-1 border-b border-zinc-100 dark:border-zinc-800">
+            <i class="pi pi-search text-zinc-400 text-sm"></i>
             <input
                 id="admin-search-input"
                 v-model="query"
                 type="text"
                 placeholder="Cari menu, halaman, fitur..."
-                class="flex-1 px-3 py-3.5 bg-transparent text-sm text-zinc-900 dark:text-zinc-100 outline-none placeholder:text-zinc-400"
+                class="flex-1 px-3 py-3 bg-transparent text-sm text-zinc-900 dark:text-zinc-100 outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 autocomplete="off"
                 @input="activeIndex = 0"
             />
             <button
                 v-if="query"
                 @click="query = ''"
-                class="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 mr-2"
+                class="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 mr-2 p-0.5"
             >
                 <i class="pi pi-times-circle text-sm"></i>
             </button>
-            <kbd class="text-[10px] text-zinc-400 border border-zinc-200 dark:border-zinc-700 rounded px-1.5 py-0.5 font-mono">esc</kbd>
+            <kbd class="text-[10px] text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 rounded px-1.5 py-0.5 font-mono">esc</kbd>
         </div>
 
         <!-- Recent (when no query) -->
