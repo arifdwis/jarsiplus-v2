@@ -9,7 +9,10 @@ import { useFlash } from '@/Composables/useFlash';
 useFlash();
 
 const sidebarOpen = ref(true);
+const sidebarMini = ref(false);
+
 const toggleSidebar = () => { sidebarOpen.value = !sidebarOpen.value; };
+const toggleMini = () => { sidebarMini.value = !sidebarMini.value; };
 </script>
 
 <template>
@@ -17,13 +20,18 @@ const toggleSidebar = () => { sidebarOpen.value = !sidebarOpen.value; };
         <Toast position="top-right" />
         <ConfirmDialog />
 
-        <AppTopbar :sidebar-open="sidebarOpen" @toggle-sidebar="toggleSidebar" />
-        <AppSidebar :open="sidebarOpen" />
+        <AppSidebar :open="sidebarOpen" :mini="sidebarMini" />
+        <AppTopbar
+            :sidebar-open="sidebarOpen"
+            :sidebar-mini="sidebarMini"
+            @toggle-sidebar="toggleSidebar"
+            @toggle-mini="toggleMini"
+        />
 
         <main
             :class="[
-                'pt-12 transition-all duration-200 min-h-screen',
-                sidebarOpen ? 'md:ml-56' : 'ml-0',
+                'pt-14 transition-all duration-200 min-h-screen',
+                sidebarOpen ? (sidebarMini ? 'md:ml-16' : 'md:ml-60') : 'ml-0',
             ]"
         >
             <div class="p-4 max-w-screen-2xl">
