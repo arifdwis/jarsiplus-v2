@@ -138,11 +138,11 @@ function clearRecent() {
         :draggable="false"
         :dismissable-mask="true"
         position="top"
-        class="!w-full !max-w-2xl !mt-20"
+        class="!w-full !max-w-2xl !mt-20 !outline-none focus:!outline-none"
         :pt="{
             mask: { class: '!bg-zinc-900/50 dark:!bg-black/70 backdrop-blur-sm' },
-            root: { class: '!shadow-xl !border !border-zinc-200 dark:!border-zinc-700' },
-            content: { class: '!p-0 !rounded-md !overflow-hidden !bg-white dark:!bg-zinc-900' },
+            root: { class: '!shadow-xl !border !border-zinc-200 dark:!border-zinc-700 focus:!outline-none focus-visible:!outline-none' },
+            content: { class: '!p-0 !rounded-md !overflow-hidden !bg-white dark:!bg-zinc-900 focus:!outline-none focus-visible:!outline-none' },
         }"
     >
         <!-- Search input -->
@@ -153,7 +153,7 @@ function clearRecent() {
                 v-model="query"
                 type="text"
                 placeholder="Cari menu, halaman, fitur..."
-                class="flex-1 px-3 py-3 bg-transparent text-sm text-zinc-900 dark:text-zinc-100 outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                class="flex-1 px-3 py-3 bg-transparent text-sm text-zinc-900 dark:text-zinc-100 outline-none ring-0 border-0 shadow-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 autocomplete="off"
                 @input="activeIndex = 0"
             />
