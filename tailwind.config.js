@@ -7,7 +7,7 @@ export default {
     './app/**/*.php',
     './modules/**/*.php',
   ],
-  darkMode: 'class',
+  darkMode: ['class', '.app-dark'],
   theme: {
     extend: {
       colors: {
