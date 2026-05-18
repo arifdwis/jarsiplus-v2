@@ -48,7 +48,9 @@ export function useMenu() {
             const url = '/' + item.uri.replace(/^\//, '');
             node.url = url;
             node.command = (e) => {
-                e.originalEvent.preventDefault();
+                // Support both PrimeVue MenuItem event ({ originalEvent }) and native DOM events.
+                const native = e?.originalEvent ?? e;
+                native?.preventDefault?.();
                 import('@inertiajs/vue3').then(({ router }) => router.visit(url));
             };
         }
