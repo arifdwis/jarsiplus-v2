@@ -1,49 +1,55 @@
 <?php
 
-use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PermohonanController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-// Public routes
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('sso.authorize'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+/*
+|--------------------------------------------------------------------------
+| Public routes (no auth required)
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [PublicController::class, 'welcome'])->name('home');
+Route::get('/about', [PublicController::class, 'about'])->name('about');
+Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+Route::get('/faq', [PublicController::class, 'faq'])->name('faq');
+Route::get('/inovasi', [PublicController::class, 'inovasiIndex'])->name('inovasi.index');
+Route::get('/inovasi/{slug}', [PublicController::class, 'inovasiShow'])->name('inovasi.show');
+Route::get('/laman/{slug}', [PublicController::class, 'laman'])->name('laman.show');
 
-Route::get('/faq', [FaqController::class, 'index'])->name('faq');
-
-// Login/logout aliases pointing to SSO routes
+/*
+|--------------------------------------------------------------------------
+| Auth (SSO) — login/logout aliases
+|--------------------------------------------------------------------------
+*/
 Route::redirect('/login', '/oauth/sso/authorize')->name('login');
 Route::get('/logout', fn () => redirect()->route('sso.logout'))->name('logout');
 
-// Protected routes
+/*
+|--------------------------------------------------------------------------
+| Protected routes (requires SSO authenticated session)
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard', [
+        return inertia('Dashboard', [
             'user' => auth()->user(),
         ]);
     })->name('dashboard');
 
-    // Permohonan routes
+    // Permohonan (innovator portal)
     Route::middleware('submission.window')->group(function () {
         Route::resource('permohonan', PermohonanController::class);
         Route::post('permohonan/{permohonan}/submit', [PermohonanController::class, 'submit'])
             ->name('permohonan.submit');
 
-        // File upload routes
         Route::post('permohonan/{permohonan}/upload', [FileUploadController::class, 'upload'])
             ->name('file.upload');
         Route::delete('file/{file}', [FileUploadController::class, 'destroy'])
             ->name('file.destroy');
     });
 
-    // File download (no submission window check)
     Route::get('download/{file}', [FileUploadController::class, 'download'])
         ->name('file.download');
 });
